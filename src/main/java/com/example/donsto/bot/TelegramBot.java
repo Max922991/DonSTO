@@ -48,7 +48,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        System.out.println(update.getMessage().getChatId());
+
         if (update.hasMessage() && update.getMessage().hasText()) {
             String message = update.getMessage().getText();
             Long chatId = update.getMessage().getChatId();
@@ -77,7 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private String addOrder(long chatId, String message) {
-        if (chatId != botConfig.getAdminId1() || chatId != botConfig.getAdminId2()) {
+        if (chatId != botConfig.getAdminId1()) {
             return "У Вас нет доступа на удаление либо добавление заказов!";
         }
 
@@ -92,7 +92,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         order.setYearOfRelease(strings[2]);
         order.setDescription(strings[3]);
         order.setArrivalDate(strings[4]);
-        order.setDate(new Date(System.currentTimeMillis()));
+        order.setDate(new Date());
 
         orderRepo.save(order);
 
