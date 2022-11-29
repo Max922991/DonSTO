@@ -61,13 +61,13 @@ public class TelegramBot extends TelegramLongPollingBot {
             } else if (message.equals("/help")) {
                 sendMessage(chatId, HELP);
             } else {
-               sendMessage(chatId, addOrder(chatId, message));
+                sendMessage(chatId, addOrder(chatId, message));
             }
         }
     }
 
     private String deleteOrder(long chatId, String message) {
-        if (chatId != botConfig.getAdminId1() || chatId != botConfig.getAdminId2()) {
+        if (chatId != botConfig.getAdminId1()) {
             return "У Вас нет доступа на удаление либо добавление заказов!";
         }
         String[] split = message.split(" ");
@@ -83,7 +83,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         Order order = new Order();
         String[] strings = message.split("-");
-        if(strings.length != 5) {
+        if (strings.length != 5) {
             return "Заказ набран не по шаблону " + "\n" + PATTERN;
         }
 
@@ -119,6 +119,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return botConfig.getBotName();
     }
+
     @Override
     public String getBotToken() {
         return botConfig.getBotToken();
